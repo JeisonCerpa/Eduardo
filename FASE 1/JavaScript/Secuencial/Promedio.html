@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <form>
+    <h1>Calculadora Promedio</h1>
+    <label>Ingrese la primera nota: </label>
+    <input type="number" id="nota1" placeholder="Ingrese la primera nota">
+    <br><br>
+    <label>Ingrese la segunda nota: </label>
+    <input btype="number" id="nota2" placeholder="Ingrese la segunda nota">
+    <br><br>
+    <label>Ingrese la tercera nota: </label>
+    <input type="number" id="nota3" placeholder="Ingrese la tercera nota">
+    <br><br>
+    <button type="button" onclick="calcular()">Calcular</button>
+    </form>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        function calcular(){
+            var nota1 = document.getElementById("nota1").value;
+            var nota2 = document.getElementById("nota2").value;
+            var nota3 = document.getElementById("nota3").value; 
+            var resultado = document.getElementById("resultado");
+            var promedio = (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3)) / 3;
+            resultado.innerHTML = `El promedio de las notas es: ${promedio}`;
+        }
+    </script>
+</body>
+</html>

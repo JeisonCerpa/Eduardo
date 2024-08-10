@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>Calculadora Litros -> Kilometros</h1>
+    <label>Ingrese la cantidad de litros: </label>
+    <input type="number" id="litros" placeholder="Ingrese la cantidad de litros">
+    <br><br>
+    <label>Ingrese la cantidad de kilometros: </label>
+    <input type="number" id="kilometros" placeholder="Ingrese la cantidad de kilometros">
+    <br><br>
+    <button type="button" onclick="calcular()">Calcular</button><br><br>
+    <div id="resultado"></div>
+    <script>
+        function calcular(){
+            var litros = document.getElementById("litros").value;
+            var kilometros = document.getElementById("kilometros").value;
+            var resultado = document.getElementById("resultado");
+            var litroKm = parseFloat(litros) / parseFloat(kilometros);
+            resultado.innerHTML = `El resultado de la cantidad de litros por kilometros es: ${litroKm}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <form>
+        <h1>Ingrese su peso y altura</h1><br>
+        <input type="text" name="peso" id="peso" placeholder="Peso"><br>
+        <br>
+        <input type="text" name="altura" id="altura" placeholder="Altura">
+        <br><br>
+        <button type="button" onclick="calcular()">Enviar</button>
+        <br>
+    </form>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        function calcular() {
+            var peso = document.getElementById("peso").value;
+            var altura = document.getElementById("altura").value;
+            var resultado = document.getElementById("resultado");
+            var imc = peso / (altura ** 2);
+            resultado.innerHTML = `Su IMC es: ${imc}`;
+        }
+    </script>
+</body>
+</html>

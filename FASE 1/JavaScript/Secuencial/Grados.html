@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>Calculadora Fahrenheit -> Celsius</h1>
+    <label>Ingrese la temperatura en Fahrenheit</label><br>
+    <input type="number" id="fahrenheit" placeholder="Ingrese la temperatura en Fahrenheit">
+    <br><br>
+    <button type="button" onclick="calcular()">Calcular</button><br><br>
+    <div id="resultado"></div>
+    <script>
+        function calcular(){
+            var fahrenheit = document.getElementById("fahrenheit").value;
+            var resultado = document.getElementById("resultado");
+            var celsius = (parseFloat(fahrenheit) - 32) * 5 / 9;
+            resultado.innerHTML = `La temperatura en Celsius es: ${celsius}`;
+        }
+    </script>
+</body>
+</html>

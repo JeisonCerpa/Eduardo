@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <h1> ¿Cual es tu edad?</h1>
+    <input type="number" name="edad" id="edad">
+    <br><br>
+    <button type="button" onclick="calcular()">Calcular</button><br><br>
+    <div id="resultado"></div>
+    <script>
+        function calcular(){
+            var edad = document.getElementById("edad").value;
+            var resultado = document.getElementById("resultado");
+            if (edad >= 18){
+                resultado.innerHTML = `Eres mayor de edad`;
+            } else {
+                resultado.innerHTML = `Eres menor de edad`;
+            }
+        }
+    </script>
+</body>
+</html>

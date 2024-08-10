@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>Resta 15%</h1>
+    <p>Realiza un programa que reste el 15% de un número ingresado por el usuario.</p>
+    <label>Ingrese un número: </label>
+    <input type="number" id="numero" placeholder="Ingrese un número">
+    <br><br>
+    <button type="button" onclick="calcular()">Calcular</button>
+    <br><br>
+    <div id="resultado"></div>
+    <script>
+        function calcular(){
+            var numero = document.getElementById("numero").value;
+            var resultado = document.getElementById("resultado");
+            var resta = parseFloat(numero) - (parseFloat(numero) * 0.15);
+            resultado.innerHTML = `El resultado de restar el 15% de ${numero} es: ${resta}`;
+        }
+    </script>
+
+</body>
+</html>

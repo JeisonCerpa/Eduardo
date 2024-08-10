@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-image: url('pizza.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        background-image: linear-gradient(to right, green, white, red);
+        background-size: contain;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        font-size: 50px;
+        margin-top: 0;
+        padding-top: 20px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    .formulario {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+        width: 50%;
+        margin-left: 25%;
+        
+    }
+    select {
+        padding: 10px;
+        margin: 10px;
+        font-size: 20px;
+    }
+    button {
+        padding: 10px;
+        font-size: 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    #resultado {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+</style>
+<body>
+    <div class="formulario">
+    <h1>Pizzeria Bella Napoli</h1>
+    <h2>Seleccione el tipo de pizza:</h2> 
+    <select id="tipoPizza">
+        <option value="NoVegetariana">No Vegetariana</option>
+        <option value="Vegetariana">Vegetariana</option>
+    </select>
+    <div id="tiposdepizzas">
+        <div id="NoVegetariana">
+            <h2>No Vegetariana</h2>
+            <select name="ingrediente" id="ingrediente">
+                <option value="Jamon">Jamon</option>
+                <option value="Pepperoni">Pepperoni</option>
+                <option value="Salami">Salami</option>
+            </select>
+        </div>
+        <div id="Vegetariana" style="display: none">
+            <h2>Vegetariana</h2>
+            <select name="ingrediente" id="ingrediente">
+                <option value="Pimiento">Pimiento</option>
+                <option value="Cebolla">Cebolla</option>
+                <option value="Tofu">Tofu</option>
+            </select>
+    </div>
+    <br>
+    <button type="button" onclick="enviar()">Enviar</button>
+    <br>
+    <br>
+    <div id="resultado"></div>
+    </div>
+    <script>
+        const tipoPizzaSelect = document.getElementById("tipoPizza");
+        const tiposdepizzas = document.getElementById("tiposdepizzas");
+        const NoVegetariana = document.getElementById("NoVegetariana");
+        const Vegetariana = document.getElementById("Vegetariana");
+        tipoPizzaSelect.addEventListener("change", () => {
+            const selectedOption = tipoPizzaSelect.value;
+            if (selectedOption === "NoVegetariana") {
+                NoVegetariana.style.display = "block";
+                Vegetariana.style.display = "none";
+            } else if (selectedOption === "Vegetariana") {
+                NoVegetariana.style.display = "none";
+                Vegetariana.style.display = "block";
+            }
+        });
+        function enviar(){
+            var ingrediente = document.getElementById("ingrediente").value;
+            var resultado = document.getElementById("resultado");
+            resultado.innerHTML = `Su pizza esta en camino, contiene ${ingrediente}, queso mozarella y tomate, espera pacientemente. `;
+        }
+    </script>
+</body>
+</html>

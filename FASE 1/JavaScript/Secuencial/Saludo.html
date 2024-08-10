@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <form>
+        <h1>Ingrese su nombre</h1><br>
+        <input type="text" name="nombre" id="nombre" placeholder="Juan">
+        <br><br>
+        <button type="button" onclick="saludo()">Enviar</button>
+        <br>
+    </form>
+    <br>
+    <div id="resultado"></div>
+    <script>
+        function saludo() {
+            var nombre = document.getElementById("nombre").value;
+            var resultado = document.getElementById("resultado");
+            resultado.innerHTML = `Hola ${nombre}, bienvenido`;
+        }
+    </script>
+</body>
+</html>

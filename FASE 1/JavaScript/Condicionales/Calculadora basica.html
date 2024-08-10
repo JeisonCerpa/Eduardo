@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <form>
+    <h1>Calculadora Basica</h1>
+    <input type="number" name="numero1" id="numero1" placeholder="Ingresa un numero">
+    <input type="number" name="numero2" id="numero2" placeholder="Ingresa un numero"><br><br>
+    <select name="operacion" id="operacion">
+        <option value="suma">Suma</option>
+        <option value="resta">Resta</option>
+        <option value="multiplicacion">Multiplicacion</option>
+        <option value="division">Division</option>	
+    </select>
+    <br>
+    <br>
+    <button type="button" onclick="calcular()">Calcular</button>
+    </form>
+    <div id="resultado"></div>
+    <script>
+        function calcular(){
+            var numero1 = document.getElementById("numero1").value;
+            var numero2 = document.getElementById("numero2").value;
+            var resultado = document.getElementById("resultado");
+            var operacion = document.getElementById("operacion").value;
+            if (operacion == "suma"){
+                resultado.innerHTML = `El resultado de la suma es: ${parseInt(numero1) + parseInt(numero2)}`;
+            } else if (operacion == "resta"){
+                resultado.innerHTML = `El resultado de la resta es: ${parseInt(numero1) - parseInt(numero2)}`;
+            } else if (operacion == "multiplicacion"){
+                resultado.innerHTML = `El resultado de la multiplicacion es: ${parseInt(numero1) * parseInt(numero2)}`;
+            } else {
+                if (numero2 == 0){
+                    resultado.innerHTML = `No se puede dividir entre 0`;
+                } 
+                else {
+                resultado.innerHTML = `El resultado de la division es: ${parseInt(numero1) / parseInt(numero2)}`;
+            }
+            }
+        }
+    </script>
+</body>
+</html>

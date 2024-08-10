@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>Numero positivo o negativo</h1>
+    <input type="number" id="number" placeholder="Ingresa un numero">
+    <br><br>
+    <button type="button" onclick="calcular()">Calcular</button><br><br>
+    <div id="resultado"></div>
+    <script>
+        function calcular(){
+            var number = document.getElementById("number").value;
+            var resultado = document.getElementById("resultado");
+            if (number > 0){
+                resultado.innerHTML = `El numero ${number} es positivo`;
+            } else if (number < 0){
+                resultado.innerHTML = `El numero ${number} es negativo`;
+            } else {
+                resultado.innerHTML = `El numero ${number} es neutro`;
+            }
+        }
+    </script>
+</body>
+</html>

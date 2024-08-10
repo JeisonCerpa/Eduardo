@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<body>
+    <h1>Tabla de multiplicar</h1>
+    <h2>Ingresa un numero</h2>
+    <input type="number" name="numero" id="numero">
+    <button onclick="tabla()">Generar tabla</button>
+    <br>
+    <br>
+    <div id="tabla"></div>
+    <script>
+        function tabla(){
+            let numero = document.getElementById('numero').value;
+            let tabla = document.getElementById('tabla');
+            tabla.innerHTML = '';
+            for(let i = 1; i <= 10; i++){
+                let resultado = numero * i;
+                tabla.innerHTML += `${numero} x ${i} = ${resultado} <br>`;
+            }
+        }
+    </script>
+</body>
+</html>

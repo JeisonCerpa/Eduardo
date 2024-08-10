@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+</style>
+<body>
+    <form>
+        <h1>Calculadora envio</h1>
+        <input type="text" name="play" id="play" placeholder="Ingrese PlayStations vendidos."><br>
+        <br>
+        <input type="text" name="xbox" id="xbox" placeholder="Ingrese Xbox vendidos.">
+        <br><br>
+        <button type="button" onclick="calcular()">Enviar</button>
+    </form>
+    <br>
+    <div id="pesopaqueteresult"></div>
+    <div id="resultado"></div>
+    <script>
+        function calcular() {
+            const pesoplay = 2.3;
+            const pesoxbox = 3.2;
+            var costoenvio = 5;
+            var play = document.getElementById("play").value;
+            var xbox = document.getElementById("xbox").value;
+            let pesopaquete = (play * pesoplay) + (xbox * pesoxbox);
+            let costototal = pesopaquete * costoenvio;
+            var resultado = document.getElementById("resultado");
+            pesopaqueteresult.innerHTML = `El peso total de el envio son: ${pesopaquete} Lb.<br>`;
+            resultado.innerHTML = `El costo total del envio es: ${costototal}`;
+
+        }
+    </script>
+</body>
+</html>
