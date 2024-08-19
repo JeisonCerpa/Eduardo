@@ -18,7 +18,6 @@ body {
 /* Barra de progreso */
 .progress-bar {
     height: 30px;
-    background-color: #24bd38;
     border-radius: 25px;
     animation: load 10s linear forwards;
 }
@@ -30,7 +29,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 18px;
+    font-size: 20px;
     color: #ffffff;
     animation: count 10s linear forwards;
 }
@@ -39,7 +38,7 @@ body {
 @keyframes load {
     0% { width: 0; background-color: red;}
     35% { width: 35%; background-color: yellow; }
-    100% { width: 100%; }
+    100% { width: 100%; background-color: #24bd38;}
 }
 
 /* Animación de conteo */
