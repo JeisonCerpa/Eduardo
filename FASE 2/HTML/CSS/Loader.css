@@ -1,0 +1,58 @@
+/* Estilos para el cuerpo del documento */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+/* Contenedor del cargador */
+.loader-container {
+    width: 80%;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+}
+
+/* Barra de progreso */
+.progress-bar {
+    height: 30px;
+    background-color: #24bd38;
+    border-radius: 25px;
+    animation: load 10s linear forwards;
+}
+
+/* Texto de porcentaje */
+.progress-bar::after {
+    content: '0%';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: #ffffff;
+    animation: count 10s linear forwards;
+}
+
+/* Animación de carga */
+@keyframes load {
+    0% { width: 0; background-color: red;}
+    35% { width: 35%; background-color: yellow; }
+    100% { width: 100%; }
+}
+
+/* Animación de conteo */
+@keyframes count {
+    0% { content: '0%'; }
+    10% { content: '10%'; }
+    20% { content: '20%'; }
+    30% { content: '30%'; }
+    40% { content: '40%'; }
+    50% { content: '50%'; }
+    60% { content: '60%'; }
+    70% { content: '70%'; }
+    80% { content: '80%'; }
+    90% { content: '90%'; }
+    100% { content: '100%'; }
+}
