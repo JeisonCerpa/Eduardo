@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #b6b6b6;
 }
 
 /* Contenedor del cargador */
@@ -43,14 +43,14 @@ body {
 
 /* Animación de conteo */
 @keyframes count {
-    0% { content: '0%'; }
+    0% { content: '0%'; color: black;}
     10% { content: '10%'; }
     20% { content: '20%'; }
     30% { content: '30%'; }
     40% { content: '40%'; }
     50% { content: '50%'; }
     60% { content: '60%'; }
-    70% { content: '70%'; }
+    70% { content: '70%'; color: white;}
     80% { content: '80%'; }
     90% { content: '90%'; }
     100% { content: '100%'; }
