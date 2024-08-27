@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Formulario de inicio de sesión</title>
+</head>
+
+<body>
+    <h1>Formulario de inicio de sesión</h1>
+    <form>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <br><br>
+        <label for="password">Contraseña:</label>
+        <input type="password" name="pw" id="pw">
+        <input type="checkbox" name="chk" id="chk"> Mostrar contrseña <br>
+        <br><br>
+        <input type="button" value="Verificar" onclick="validarEmail()">
+    </form>
+</body>
+<script>
+    chk = document.getElementById("chk");
+    pw = document.getElementById("pw")
+
+    chk.onchange = function (e) {
+        pw.type = chk.checked ? "text" : "password";
+    }
+    function validarEmail() {
+        var email = document.getElementById("email").value;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (emailRegex.test(email)) {
+            alert("Correo válido");
+        } else {
+            alert("Correo inválido");
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #bdc3c7;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2c3e50, #bdc3c7);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  	
+}
+
+.gjs-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  padding: 10px;
+}
+
+.gjs-cell {
+  min-height: 75px;
+  flex-grow: 1;
+  flex-basis: 100%;
+}
+
+#banner {
+  padding: 0px 10px 10px 10px;
+  height: 15vh;
+}
+
+#logo {
+  display: flex;
+  flex-basis: 10%;
+  max-width: 10%;
+  min-height: 75px;
+}
+
+#i9m1a {
+  padding: 0px 9% 10px 9%;
+}
+
+#i9pjj {
+  flex-basis: 100%;
+}
+
+#izbat {
+  display: flex;
+  flex-basis: 10%;
+  max-width: 10%;
+}
+
+#iy76t {
+  padding: 10px 9% 10px 9%;
+}
+
+#ih6gs {
+  flex-basis: 100%;
+}
+
+#iq2n9 {
+  padding: 10px 9% 10px 9%;
+}
+
+#iynbz {
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .gjs-row {
+    flex-wrap: wrap;
+  }
+}
