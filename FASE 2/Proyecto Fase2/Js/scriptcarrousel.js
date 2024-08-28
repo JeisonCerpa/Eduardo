@@ -20,9 +20,6 @@ const createCarrousel = () => {
   const fov = calculateFov(carrouselProps);
   const height = calculateHeight(tz);
 
-  container.style.width = tz * 2 + gap * length + "px";
-  container.style.height = height + "px";
-
   carrouselItems.forEach((item, i) => {
     const degressByItem = degress * i + "deg";
     item.style.setProperty("--rotatey", degressByItem);
