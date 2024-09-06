@@ -16,7 +16,7 @@ img {
 }
 
 .container-carrousel {
-    --widthItem: 150px;
+    --widthItem: 200px;
     --heightItem: 100px;
     width: var(--widthItem);
     height: var(--heightItem);
