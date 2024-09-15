@@ -80,6 +80,59 @@ while True:
     elif seleccion == 2:
         break
     elif seleccion == 3:
+        while True:
+            print("Bienvenido al sistema de productos.")
+            print("1. Consultar")
+            print("2. Insertar")
+            print("0. Salir")
+            seleccion = int(input("Selecciona una opcion: "))
+            if seleccion == 1:
+                while True:
+                    ingresar = input("Ingrese el ID del producto: ")
+                    tablas.execute("SELECT * FROM `productos` WHERE id_producto = %s;", (ingresar,))
+                    resultado = tablas.fetchone()
+                    if resultado:
+                        print(f"ID del producto: {resultado[0]}, Nombre: {resultado[1]}, Descripcion: {resultado[2]}, Precio: {resultado[3]}, Fecha de Vencimiento: {resultado[4]}")
+                        print("1. Para actualizar datos")
+                        print("2. Para eliminar producto")
+                        print("3. Para volver a consultar")
+                        print("0. Para salir")
+                        opcion = input("Selecciona una opcion: ")
+                        if opcion == "1":
+                            nombre = input("Ingrese el nombre: ")
+                            descripcion = input("Ingrese una breve descripcion: ")
+                            precio = input("Ingrese el precio: ")
+                            fecha_venc = input("Ingrese la fecha de vencimiento: ")
+                            tablas.execute("UPDATE `productos` SET nombre = %s, descripcion = %s, precio = %s, fecha_venc = %s WHERE id_producto = %s;", (nombre, descripcion, precio, fecha_venc, ingresar))
+                            con.commit()
+                            print("Datos actualizados correctamente.")
+                        elif opcion == "2":
+                            tablas.execute("DELETE FROM `productos` WHERE id_pelicula = %s;", (ingresar,))
+                            con.commit()
+                            print("Usuario eliminado correctamente.")
+                        elif opcion == "3":
+                            continue
+                        elif opcion == "0":
+                            break
+                    if ingresar == "0":
+                            break
+                    else:
+                        print("No se encontró ningún producto con ese ID.")
+    
+    elif seleccion == 2:
+        while True:
+            print("Ingrese los datos del usuario.")
+            id_producto = input("Ingrese la cédula: ")
+            nombre = input("Ingrese el nombre: ")
+            descripcion = input("Ingrese el apellido: ")
+            precio = input("Ingrese la dirección: ")
+            fecha_venc = input("Ingrese el teléfono: ")
+            tablas.execute("INSERT INTO `productos` (id_producto, nombre, descripcion, precio, fecha_venc) VALUES (%s, %s, %s, %s, %s);", (id_producto, nombre, descripcion, precio, fecha_venc))
+            con.commit()
+            print("Producto agregado correctamente.")
+            if input("¿Desea agregar otro producto? (s/n): ") == "n":
+                break
+    elif seleccion == 0:
         break
     elif seleccion == 4:
         break
