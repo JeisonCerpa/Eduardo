@@ -10,6 +10,7 @@ con =mysql.connector.connect(
 
 tablas = con.cursor()
 while True:
+    system("cls")
     print("Bienvenido al sistema de gestion de base de datos.")
     print("1. Usuarios")
     print("2. Clientes")
@@ -85,6 +86,61 @@ while True:
             elif seleccion == 0:
                 break
     elif seleccion == 2:
+        while True:
+            print("1. Consultar")
+            print("2. Insertar")
+            print("0. Salir")
+            seleccion = int(input("Selecciona una opcion: "))
+            if seleccion == 1:
+                while True:
+                    ingresar = input("Ingrese el ID del cliente: ")
+                    tablas.execute("SELECT * FROM `clientes` WHERE cedula = %s;", (ingresar,))
+                    resultado = tablas.fetchone()
+                    if resultado:
+                        print(f"ID del cliente: {resultado[0]}, Nombre: {resultado[1]}, apellido: {resultado[2]}, direccion: {resultado[3]}, cedula: {resultado[4]} telefono: {resultado[5]} email: {resultado[6]} password: {resultado[7]}") 
+                        print("1. Para actualizar datos")
+                        print("2. Para eliminar producto")
+                        print("3. Para volver a consultar")
+                        print("0. Para salir")
+                        opcion = input("Selecciona una opcion: ")
+                        if opcion == "1":
+                            cedula= input ('ingrese la cedula')
+                            nombre = input("Ingrese el nombre: ")
+                            apellidos = input("Ingrese un apellido: ")
+                            direccion = input("Ingrese una direccion: ")
+                            cedula = input("Ingrese su numero de cedula: ")
+                            telefono = input("ingrese su numero de telefono:")
+                            email = input("ingrese su email:")
+                            tablas.execute("UPDATE `clientes` SET nombre = %s, apellido = %s, direccion = %s, cedula = %s, telefono = %s, email = %s, password = %s, WHERE cedula = %s;", (nombre, apellidos, direccion, cedula, telefono, email, ingresar))
+                            con.commit()
+                            print("Datos actualizados correctamente.")
+                        elif opcion == "2":
+                            tablas.execute("DELETE FROM `clientes` WHERE id_cliente = %s;", (ingresar,))
+                            con.commit()
+                            print("Usuario eliminado correctamente.")
+                        elif opcion == "3":
+                            continue
+                        elif opcion == "0":
+                            break
+                    if ingresar == "0":
+                            break
+                    else:
+                        print("No se encontró ningún producto con ese ID.")
+            
+    elif seleccion == 2:
+        while True:
+            print("Ingrese los datos del usuario.")
+            cedula = input("Ingrese la cedula: ")
+            nombre = input("Ingrese el nombre: ")
+            apellido = input("Ingrese el apellido: ")
+            direccion = input("Ingrese la dirección: ")
+            email = input("Ingrese el email: ")
+            tablas.execute("INSERT INTO `clientes` (cedula, nombre, apellido, direccion, telefono, cedula, email) VALUES (%s, %s, %s, %s, %s, %s);", (cedula, nombre, apellido, direccion, telefono, cedula, email))
+            con.commit()
+            print(" producto agregado correctamente.")
+            if input("¿Desea agregar otro producto? (s/n): ") == "n":
+                break
+    elif seleccion == 0:
         break
     elif seleccion == 3:
         while True:
