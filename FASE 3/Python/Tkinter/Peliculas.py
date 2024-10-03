@@ -8,16 +8,26 @@ def peliculas():
     
 ventana = tk.Tk()
 ventana.title("Peliculas")
+ventana.geometry("450x250")
+ventana.resizable(False, False)
 
-tk.Label(ventana, text="Ingrese el nombre de la pelicula: ").grid(row=0, column=0)
+ventana.grid_columnconfigure(0, weight=1)
+ventana.grid_columnconfigure(3, weight=1)
+
+
+pelicula = tk.Label(ventana, text="Escribe el titulo de la pelicula", font=("Arial", 10))
+pelicula.grid(row=0, column=0, padx=10, pady=10)
+
 entry_peliculas = tk.Entry(ventana)
-entry_peliculas.grid(row=0, column=1)
+entry_peliculas.grid(row=1, column=0, padx=10, pady=10)
 
-boton_calcular = tk.Button(ventana, text="Agregar", command=peliculas)
-boton_calcular.grid(row=1, column=0)
+boton_calcular = tk.Button(ventana, text="Añadir", command=peliculas, font=("Arial", 10))
+boton_calcular.grid(row=2, column=0, padx=10, pady=10)
 
-tk.Label(ventana, text="Lista de peliculas").grid(row=2, column=0)
+lista = tk.Label(ventana, text="Lista de peliculas", font=("Arial", 10))
+lista.grid(row=0, column=2, padx=10, pady=10)
+
 lista = tk.Listbox(ventana)
-lista.grid(row=2, column=1)
+lista.grid(row=1, column=2, rowspan=2, padx=10, pady=10)
 
 ventana.mainloop()

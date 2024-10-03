@@ -25,7 +25,7 @@ ventana.title("Saludo")
 cuadro = tk.LabelFrame(ventana, text="Entrada de Datos", padx=10, pady=10)
 cuadro.grid(row=0, column=0, padx=20, pady=20)
 
-entry = tk.Entry(cuadro, bg="lightgreen", fg="red")
+entry = tk.Entry(cuadro, bg="green1", fg="red")
 entry.insert(0, 'Escribe tu nombre...')
 entry.grid(row=0, column=0, padx=10, pady=10)
 

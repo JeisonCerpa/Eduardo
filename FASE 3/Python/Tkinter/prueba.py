@@ -1,43 +1,47 @@
 import tkinter as tk
 
-def saludar():
-    nombre = entrada.get()
-    mensaje = f'Hola {nombre}!'
-    
-    resultado.delete("1.0", tk.END)
-    resultado.insert(tk.END, str(mensaje))
-    
-def on_entry_click(event):
-    if entrada.get() == 'Escribe tu nombre...':
-       entrada.delete(0, tk.END)
-       entrada.insert(0, '')
-       entrada.config(fg = 'red')
-       
-def on_focusout(event):
-    if entrada.get() == '':
-        entrada.insert(0, 'Escribe tu nombre...')
-        entrada.config(fg = 'red')
-    
-ventana = tk.Tk()
-ventana.geometry("500x250")
-ventana.resizable(False, False)
-ventana.title("Saludo")
+def close_window():
+    root.destroy()  # Cierra la ventana
 
-cuadro = tk.LabelFrame(ventana, text="Entrada de Datos", padx=10, pady=10).grid(row=0, column=0, padx=20, pady=20)
+def minimize_window():
+    root.iconify()  # Minimiza la ventana
 
-entrada = tk.Entry(cuadro, bg="lightgreen", fg="red")
-entrada.insert(0, 'Escribe tu nombre...')
-entrada.grid(row=0, column=0, padx=10, pady=10)
+def draw_gradient(canvas, width, height, color1, color2):
+    for i in range(height):
+        ratio = i / height
+        r = int((1 - ratio) * int(color1[1:3], 16) + ratio * int(color2[1:3], 16))
+        g = int((1 - ratio) * int(color1[3:5], 16) + ratio * int(color2[3:5], 16))
+        b = int((1 - ratio) * int(color1[5:7], 16) + ratio * int(color2[5:7], 16))
+        color = f'#{r:02x}{g:02x}{b:02x}'
+        canvas.create_line(0, i, width, i, fill=color)
 
-cuadro2 = tk.LabelFrame(ventana, text="Resultado", padx=10, pady=10).grid(row=0, column=1, padx=20, pady=20)
+root = tk.Tk()
+root.geometry("500x300")
 
-resultado = tk.Text(cuadro2, height=1, width=20, bg="cyan")
-resultado.grid(row=0, column=0)
+# Eliminar la barra de título
+root.overrideredirect(True)
 
-cuadro3 = tk.LabelFrame(ventana, text="Enviar", padx=10, pady=10).grid(row=1, column=0, padx=20, pady=20)
+# Crear un canvas para la barra de título personalizada
+title_bar = tk.Canvas(root, height=30, bg='white', highlightthickness=0)
+title_bar.pack(fill=tk.X)
 
-boton_calcular = tk.Button(cuadro3, text="Enviar", command=saludar, background="cyan", width=20)
-boton_calcular.grid(row=0, column=0)
+# Dibujar un gradiente en el canvas
+draw_gradient(title_bar, 500, 30, '#000000', '#434343')  # Gradiente de negro a gris
 
-ventana.mainloop()
+# Botón de minimizar
+minimize_button = tk.Button(title_bar, text="_", command=minimize_window, bg='white', fg="black", borderwidth=0)
+minimize_button.place(relx=1.0, rely=0.5, anchor='e')  # Colocar a la derecha
 
+# Botón de cerrar
+close_button = tk.Button(title_bar, text="X", command=close_window, bg='white', fg="black", borderwidth=0)
+close_button.place(relx=0.95, rely=0.5, anchor='e')  # Colocar a la derecha del botón minimizar
+
+# Crear el contenido principal
+content_frame = tk.Frame(root)
+content_frame.pack(pady=20)
+
+# Ejemplo de entrada
+entrada = tk.Entry(content_frame)
+entrada.pack()
+
+root.mainloop()
