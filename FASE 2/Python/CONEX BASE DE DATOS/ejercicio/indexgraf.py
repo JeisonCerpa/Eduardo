@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 import mysql.connector
 
-# Conexión a la base de datos
 try:
     con = mysql.connector.connect(
         host="localhost",
@@ -14,12 +13,10 @@ try:
 except mysql.connector.Error as err:
     messagebox.showerror("Error", f"Error de conexión: {err}")
     exit(1)
-
-# Ventana principal
+    
 root = tk.Tk()
 root.title("Gestión de Usuarios")
 
-# Labels y cuadros de texto
 tk.Label(root, text="Cédula:").grid(row=0, column=0)
 tk.Label(root, text="Nombre:").grid(row=1, column=0)
 tk.Label(root, text="Apellido:").grid(row=2, column=0)
@@ -44,7 +41,6 @@ entry_telefono.grid(row=4, column=1)
 entry_correo.grid(row=5, column=1)
 entry_contraseña.grid(row=6, column=1)
 
-# Función para insertar
 def insertar_usuario():
     cedula = entry_cedula.get()
     nombre = entry_nombre.get()
@@ -64,7 +60,6 @@ def insertar_usuario():
     except mysql.connector.Error as err:
         messagebox.showerror("Error", f"Error al insertar: {err}")
 
-# Función para consultar
 def consultar_usuario():
     cedula = entry_cedula.get()
     tablas.execute("SELECT * FROM `usuarios` WHERE cedula = %s;", (cedula,))
@@ -87,7 +82,6 @@ def consultar_usuario():
     else:
         messagebox.showwarning("Advertencia", "No se encontró ningún usuario con esa cédula.")
 
-# Función para actualizar
 def actualizar_usuario():
     cedula = entry_cedula.get()
     nombre = entry_nombre.get()
@@ -107,7 +101,6 @@ def actualizar_usuario():
     except mysql.connector.Error as err:
         messagebox.showerror("Error", f"Error al actualizar: {err}")
 
-# Función para eliminar
 def eliminar_usuario():
     cedula = entry_cedula.get()
     confirmacion = messagebox.askyesno("Confirmación", "¿Estás seguro que deseas eliminar este usuario?")
@@ -119,15 +112,12 @@ def eliminar_usuario():
         except mysql.connector.Error as err:
             messagebox.showerror("Error", f"Error al eliminar: {err}")
 
-# Botones
 tk.Button(root, text="Insertar", command=insertar_usuario).grid(row=7, column=0)
 tk.Button(root, text="Consultar", command=consultar_usuario).grid(row=7, column=1)
 tk.Button(root, text="Actualizar", command=actualizar_usuario).grid(row=8, column=0)
 tk.Button(root, text="Eliminar", command=eliminar_usuario).grid(row=8, column=1)
 
-# Iniciar ventana principal
 root.mainloop()
 
-# Cerrar la conexión a la base de datos
 tablas.close()
 con.close()

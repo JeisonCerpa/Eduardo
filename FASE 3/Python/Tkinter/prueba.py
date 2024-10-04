@@ -1,47 +1,56 @@
 import tkinter as tk
+from tkinter import messagebox
+import mysql.connector
 
-def close_window():
-    root.destroy()  # Cierra la ventana
-
-def minimize_window():
-    root.iconify()  # Minimiza la ventana
-
-def draw_gradient(canvas, width, height, color1, color2):
-    for i in range(height):
-        ratio = i / height
-        r = int((1 - ratio) * int(color1[1:3], 16) + ratio * int(color2[1:3], 16))
-        g = int((1 - ratio) * int(color1[3:5], 16) + ratio * int(color2[3:5], 16))
-        b = int((1 - ratio) * int(color1[5:7], 16) + ratio * int(color2[5:7], 16))
-        color = f'#{r:02x}{g:02x}{b:02x}'
-        canvas.create_line(0, i, width, i, fill=color)
-
+try:
+    con = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="gabineteabogados"
+    )
+    tablas = con.cursor()
+except mysql.connector.Error as err:
+    messagebox.showerror("Error", f"Error de conexión: {err}")
+    exit(1)
+    
 root = tk.Tk()
-root.geometry("500x300")
+root.title("Gestión de Usuarios")
 
-# Eliminar la barra de título
-root.overrideredirect(True)
+tk.Label(root, text="DNI:").grid(row=0, column=0)
+tk.Label(root, text="Nombre:").grid(row=1, column=0)
+tk.Label(root, text="Dirección:").grid(row=2, column=0)
 
-# Crear un canvas para la barra de título personalizada
-title_bar = tk.Canvas(root, height=30, bg='white', highlightthickness=0)
-title_bar.pack(fill=tk.X)
+entry_dni = tk.Entry(root)
+entry_nombre = tk.Entry(root)
+entry_direccion = tk.Entry(root)
 
-# Dibujar un gradiente en el canvas
-draw_gradient(title_bar, 500, 30, '#000000', '#434343')  # Gradiente de negro a gris
+entry_dni.grid(row=0, column=1)
+entry_nombre.grid(row=1, column=1)
+entry_direccion.grid(row=2, column=1)
 
-# Botón de minimizar
-minimize_button = tk.Button(title_bar, text="_", command=minimize_window, bg='white', fg="black", borderwidth=0)
-minimize_button.place(relx=1.0, rely=0.5, anchor='e')  # Colocar a la derecha
+def consultar():
+    dni = entry_dni.get()
+    nombre = entry_nombre.get()
+    direccion = entry_direccion.get()
 
-# Botón de cerrar
-close_button = tk.Button(title_bar, text="X", command=close_window, bg='white', fg="black", borderwidth=0)
-close_button.place(relx=0.95, rely=0.5, anchor='e')  # Colocar a la derecha del botón minimizar
+    try:
+        tablas.execute(
+            "SELECT * FROM `procuradores` WHERE dni = %s;",
+            (dni,)
+        )
+        cliente = tablas.fetchone()
+        if cliente:
+            entry_nombre.delete(0, tk.END)
+            entry_direccion.delete(0, tk.END)
+            entry_nombre.insert(0, cliente[1])
+            entry_direccion.insert(0, cliente[2])
+        else:
+            messagebox.showwarning("Advertencia", "Cliente no encontrado.")
+    except mysql.connector.Error as err:
+        messagebox.showerror("Error", f"Error al consultar: {err}")
+        
+tk.Button(root, text="Consultar", command=consultar).grid(row=3, column=0)
 
-# Crear el contenido principal
-content_frame = tk.Frame(root)
-content_frame.pack(pady=20)
-
-# Ejemplo de entrada
-entrada = tk.Entry(content_frame)
-entrada.pack()
-
+    
 root.mainloop()
