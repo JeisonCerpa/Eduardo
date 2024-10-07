@@ -366,7 +366,6 @@ def ventana_procuradores():
 
     ventana3.mainloop()
 
-
 root = tk.Tk()
 root.title("Gabinete de Abogados")
 root.geometry("800x600")
