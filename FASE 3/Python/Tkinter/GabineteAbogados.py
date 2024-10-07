@@ -1,6 +1,8 @@
 import tkinter as tk
 import mysql.connector
 from tkinter import messagebox
+from tkinter import ttk
+
 try:
     con = mysql.connector.connect(
         host="localhost", user="root", password="", database="gabineteabogados"
@@ -11,7 +13,7 @@ except mysql.connector.Error as err:
     exit(1)
 
 def ventana_asuntos():
-    ventana1 = tk.Toplevel()
+    ventana1 = tk.Toplevel()    
     ventana1.title("Asuntos")
     ventana1.geometry("800x600")
 
@@ -26,20 +28,18 @@ def ventana_asuntos():
     tk.Label(ventana1, text="Fecha de Fin:").grid(row=4, column=0)
     tk.Label(ventana1, text="Estado:").grid(row=5, column=0)
     tk.Label(ventana1, text="Procurador:").grid(row=6, column=0)
-
+    
     entry_n_expediente = tk.Entry(ventana1)
     entry_clientedni = tk.Entry(ventana1)
     entry_fecha_inicio = tk.Entry(ventana1)
     entry_fecha_fin = tk.Entry(ventana1)
     entry_Estado = tk.Entry(ventana1)
-    entry_procurador = tk.Entry(ventana1)
-
+    
     entry_n_expediente.grid(row=1, column=1)
     entry_clientedni.grid(row=2, column=1)
     entry_fecha_inicio.grid(row=3, column=1)
     entry_fecha_fin.grid(row=4, column=1)
-    entry_Estado.grid(row=5, column=1)
-    entry_procurador.grid(row=6, column=1)
+    entry_Estado.grid(row=5, column=1)    
     
     def insertar_asunto():
         n_expediente = entry_n_expediente.get()
@@ -50,13 +50,15 @@ def ventana_asuntos():
         procurador = entry_procurador.get()
 
         try:
+            tablas.execute("SELECT dni FROM procuradores WHERE nombre = %s;", (procurador,))
+            dni_procurador = tablas.fetchone()[0]
             tablas.execute(
                 "INSERT INTO `asuntos` (numero_expediente, cliente_dni, fecha_inicio, fecha_fin, estado) VALUES (%s, %s, %s, %s, %s);",
                 (n_expediente, clientedni, fecha_inicio, fecha_fin, estado),
             )
             tablas.execute(
                 "INSERT INTO `asuntos_procuradores` (numero_expediente, procurador_dni) VALUES (%s, %s);",
-                (n_expediente, procurador),
+                (n_expediente, dni_procurador),
             )
             con.commit()
             messagebox.showinfo("Éxito", "Usuario agregado correctamente.")
@@ -69,7 +71,7 @@ def ventana_asuntos():
             tablas.execute(
                 "SELECT a.numero_expediente, a.cliente_dni, a.fecha_inicio, a.fecha_fin, a.estado, pa.procurador_dni "
                 "FROM asuntos a "
-                "LEFT JOIN procuradores_asuntos pa ON a.numero_expediente = pa.numero_expediente "
+                "LEFT JOIN asuntos_procuradores pa ON a.numero_expediente = pa.numero_expediente "
                 "WHERE a.numero_expediente = %s;", 
                 (n_expediente,)
             )
@@ -127,6 +129,26 @@ def ventana_asuntos():
                 messagebox.showinfo("Éxito", "Usuario eliminado correctamente.")
             except mysql.connector.Error as err:
                 messagebox.showerror("Error", f"Error al eliminar: {err}")
+    
+    def limpiar_campos():
+        entry_n_expediente.delete(0, tk.END)
+        entry_clientedni.delete(0, tk.END)
+        entry_fecha_inicio.delete(0, tk.END)
+        entry_fecha_fin.delete(0, tk.END)
+        entry_Estado.delete(0, tk.END)
+        entry_procurador.delete(0, tk.END)
+        
+    def obtener_procuradores():
+        cursor = con.cursor()
+        tablas.execute("SELECT dni, nombre FROM procuradores;")
+        procuradores = tablas.fetchall()
+        cursor.close()
+        return [f"{procurador[0]} - {procurador[1]}" for procurador in procuradores]
+
+    
+    entry_procurador = ttk.Combobox(ventana1, values=obtener_procuradores())
+    entry_procurador.grid(row=6, column=1)
+    
 
     tk.Button(ventana1, text="Insertar", command=insertar_asunto).grid(row=7, column=0)
     tk.Button(ventana1, text="Consultar", command=consultar_asunto).grid(
@@ -136,6 +158,8 @@ def ventana_asuntos():
         row=8, column=0
     )
     tk.Button(ventana1, text="Eliminar", command=eliminar_asunto).grid(row=8, column=1)
+    
+    tk.Button(ventana1, text="Limpiar", command=limpiar_campos).grid(row=9, column=0)
 
     ventana1.mainloop()
 
@@ -244,6 +268,13 @@ def ventana_clientes():
                 messagebox.showinfo("Éxito", "Usuario eliminado correctamente.")
             except mysql.connector.Error as err:
                 messagebox.showerror("Error", f"Error al eliminar: {err}")
+    
+    def limpiar_campos():
+        entry_dni.delete(0, tk.END)
+        entry_nombre.delete(0, tk.END)
+        entry_direccion.delete(0, tk.END)
+        entry_email.delete(0, tk.END)
+        entry_telefono.delete(0, tk.END)
 
     tk.Button(ventana2, text="Insertar", command=insertar_cliente).grid(row=6, column=0)
     tk.Button(ventana2, text="Consultar", command=consultar_cliente).grid(
@@ -253,7 +284,9 @@ def ventana_clientes():
         row=7, column=0
     )
     tk.Button(ventana2, text="Eliminar", command=eliminar_cliente).grid(row=7, column=1)
-
+    
+    tk.Button(ventana2, text="Limpiar", command=limpiar_campos).grid(row=8, column=0)
+    
     ventana2.mainloop()
 
 
@@ -350,6 +383,11 @@ def ventana_procuradores():
                 messagebox.showinfo("Éxito", "Usuario eliminado correctamente.")
             except mysql.connector.Error as err:
                 messagebox.showerror("Error", f"Error al eliminar: {err}")
+                
+    def limpiar_campos():
+        entry_dni.delete(0, tk.END)
+        entry_nombre.delete(0, tk.END)
+        entry_direccion.delete(0, tk.END)
 
     tk.Button(ventana3, text="Insertar", command=insertar_procurador).grid(
         row=6, column=0
@@ -363,6 +401,7 @@ def ventana_procuradores():
     tk.Button(ventana3, text="Eliminar", command=eliminar_procurador).grid(
         row=7, column=1
     )
+    tk.Button(ventana3, text="Limpiar", command=limpiar_campos).grid(row=8, column=0)
 
     ventana3.mainloop()
 
